@@ -1,5 +1,7 @@
 package com.pl.conferencedemo.models;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,7 +20,9 @@ public class Speaker {
     private  String title;
     private String company;
     private String speaker_bio;
-    private String speaker_photo;
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] speaker_photo;
 
     public Long getSpeaker_id() {
         return speaker_id;
@@ -68,16 +72,13 @@ public class Speaker {
         this.speaker_bio = speaker_bio;
     }
 
-    public String getSpeaker_photo() {
+    public byte[] getSpeaker_photo() {
         return speaker_photo;
     }
 
-    public void setSpeaker_photo(String speaker_photo) {
+    public void setSpeaker_photo(byte[] speaker_photo) {
         this.speaker_photo = speaker_photo;
     }
-
-
-
 
     //region nav props
     @ManyToMany(mappedBy = "speakers")
