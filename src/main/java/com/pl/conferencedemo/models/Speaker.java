@@ -1,9 +1,7 @@
 package com.pl.conferencedemo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "speakers")
 public class Speaker {
@@ -77,4 +75,19 @@ public class Speaker {
     public void setSpeaker_photo(String speaker_photo) {
         this.speaker_photo = speaker_photo;
     }
+
+
+
+
+    //region nav props
+    @ManyToMany(mappedBy = "speakers")
+    private List<Session> sessions;
+    public List<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
+    }
+    //end region
 }
